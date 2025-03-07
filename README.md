@@ -200,7 +200,7 @@ You need something like this:
 ```
 
 In _Step 5_, if everything works fine, you may have a media pipeline like this picture.  
-![media-pipeline](pic/media-pipeline-png)
+![media-pipeline](pic/media-pipeline.png)  
 This graph is created by results of `media-ctl -d /dev/media1 --print-dot` and [OnlineGraphiz](https://dreampuf.github.io/GraphvizOnline/).  
 You can check your current pipe line with following commands (maybe device indexes differs for you) 
 ```
