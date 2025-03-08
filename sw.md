@@ -258,6 +258,7 @@ v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl exposure=500
 v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl analogue_gain=1023
 ```
 
+## Step 8
 And eventually, we come to _Step 8_ for taking picture!  
 The output format of `ISP` is `NV12`.  
 So after taking raw data, you need to convert it to `JPEG` or `PNG`.  

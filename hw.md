@@ -14,6 +14,7 @@ This is `J8` (Lichee Pi Zero Dock) pinout:
 This is `Rpi camera` pinout:  
 ![rpi-camera-pinout](pic/rpi-camera-pinout.jpg)
 
+## Step 1 & 2
 After _Steps 1_ and _2_, you may have someting like this.  
 Those two wires connects `i2c` pins of camera module to `i2c0` of `v3s`.  
 I used pin `11` and `12` of `J8` which were unused.
@@ -22,11 +23,13 @@ I used pin `11` and `12` of `J8` which were unused.
 You may noticed that connector I used has **16 pins** :D  
 Yes, you're right. I could **not** find `15 pins` flat cable. So I used 16 pin connector and falt.  
 
+## Step 3
 _Step 3_ is about creating adapter cable Which handles wrong connections of `J8`.  
 It's somthing like this:  
 ![adapter-1](pic/adapter-1.jpg)
 ![adapter-2](pic/adapter-2.jpg)
 
+## Step 4
 _Step 4_ is about hard wiring camera enable pin (pin `11`) to `vdd`.  
 I did it because there was no free pin left on `J8` (And I messed up with `pin 16` too!)  
 Just keep it simple!
