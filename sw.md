@@ -235,27 +235,24 @@ Device topology
 ## Step 6
 In _Step 6_, you have to configure required `pad`s of each `entity` for proper media format and size.  
 As you may guess, raw image from sensor (`ov5647`) may pass through all these entity before you capture it!  
-I'm using `640x480` pixel size with `SBGGR10_1X10` data format.  
+I'm using `1920x1080` pixel size with `SBGGR10_1X10` data format.  
 ```
-media-ctl -d /dev/media1 --set-v4l2 "'ov5647 0-0036':0[fmt:SBGGR10_1X10/640x480 field:none]"
-media-ctl -d /dev/media1 --set-v4l2 "'sun6i-mipi-csi2':1[fmt:SBGGR10_1X10/640x480]"
-media-ctl -d /dev/media1 --set-v4l2 "'sun6i-csi-bridge':1[fmt:SBGGR10_1X10/640x480]"
-media-ctl -d /dev/media1 --set-v4l2 "'sun6i-isp-proc':1[fmt:SBGGR10_1X10/640x480]"
+media-ctl -d /dev/media1 --set-v4l2 "'ov5647 0-0036':0[fmt:SBGGR10_1X10/1920x1080 field:none]"
+media-ctl -d /dev/media1 --set-v4l2 "'sun6i-mipi-csi2':1[fmt:SBGGR10_1X10/1920x1080]"
+media-ctl -d /dev/media1 --set-v4l2 "'sun6i-csi-bridge':1[fmt:SBGGR10_1X10/1920x1080]"
+media-ctl -d /dev/media1 --set-v4l2 "'sun6i-isp-proc':1[fmt:SBGGR10_1X10/1920x1080]"
 ``` 
 
 ## Step 7
 In _Step 7_, you configure camera (`ov5647`) `analogue_gain` and `exposure`.  
-I'm not sure why I have to do this.  
-I think it's because of high `fps`.  
-But it works!
 Note that maybe your camera is not `subdev3`!  
 Check `media-ctl` pipeline graph.  
 ```
 v4l2-ctl -d /dev/v4l-subdev3 --list-ctrls-menu
-v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl gain_automatic=0
-v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl auto_exposure=1
-v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl exposure=500
-v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl analogue_gain=1023
+v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl gain_automatic=1
+v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl auto_exposure=0
+v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl exposure=4
+v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl analogue_gain=16
 ```
 
 ## Step 8
@@ -263,9 +260,13 @@ And eventually, we come to _Step 8_ for taking picture!
 The output format of `ISP` is `NV12`.  
 So after taking raw data, you need to convert it to `JPEG` or `PNG`.  
 ```
-v4l2-ctl --device /dev/video2 --set-fmt-video=width=640,height=480,pixelformat=NV12 --stream-mmap --stream-to=frame.nv12 --stream-skip=10 --stream-count=1 --verbose
-ffmpeg -f rawvideo -pixel_format nv12 -video_size 640x480 -i frame.nv12 -frames:v 1 frame.jpg
+v4l2-ctl --device /dev/video2 --set-fmt-video=width=1920,height=1080,pixelformat=NV12 --stream-mmap --stream-to=frame.nv12 --stream-skip=10 --stream-count=1 --verbose
+ffmpeg -f rawvideo -pixel_format nv12 -video_size 1920x1080 -i frame.nv12 -frames:v 1 frame.jpg
 ```
+
+In case you encounter memory allocation failure, try:
+1. Increase `cma` memory reservation (e.g. `28M`)
+2. Enable `swap` area
 
 Here is what I got from `Baymax`  
 ![baymax](pic/baymax-640x480.jpg)  
