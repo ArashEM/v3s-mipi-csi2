@@ -269,6 +269,9 @@ In case you encounter memory allocation failure, try:
 2. Enable `swap` area
 
 Here is what I got from `Baymax`  
-![baymax](pic/baymax-640x480.jpg)  
+
+![baymax](pic/baymax-1920x1080.jpg)   
+
 From other point for view, I had it like this:  
+
 ![baymax-pox](pic/baymax-pov.jpg)  
