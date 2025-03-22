@@ -10,6 +10,7 @@ So in this document, we are about to connect these two and take a tiny picture!
 - First you need to setup your [hardware](/hw.md)  
 - Then [software](/sw.md) configuration and taking picture
 - For more information following [resoures](/res.md) may help
+- Simple [application](/app/README.md) to stream camera data to LCD
 
 # Result
 Here is what I got from `Baymax` (it's `1920x1080`)  
