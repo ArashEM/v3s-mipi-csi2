@@ -175,6 +175,16 @@ int init_device(int fd) {
     return 0;
 }
 
+void uninit_device(void) {
+    unsigned int i;
+
+    for (i = 0; i < n_buffers; ++i)
+        if (-1 == munmap(buffers[i].start, buffers[i].length))
+            errno_exit("munmap");
+
+    free(buffers);
+}
+
 int start_capturing(int fd) {
     unsigned int i;
     enum v4l2_buf_type type;
@@ -195,6 +205,14 @@ int start_capturing(int fd) {
         errno_exit("VIDIOC_STREAMON");
 
     return 0;
+}
+
+void stop_capturing(int fd) {
+    enum v4l2_buf_type type;
+
+    type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    if (-1 == xioctl(fd, VIDIOC_STREAMOFF, &type))
+        errno_exit("VIDIOC_STREAMOFF");
 }
 
 int stream_frame(GstAppSrc* appsrc, void* start, size_t length) {
@@ -359,7 +377,7 @@ int main(int argc, char* argv[]) {
     init_device(fd);
     start_capturing(fd);
 
-    /* initialize gst*/
+    /* initialize GStreamer */
     gst_init(&argc, &argv);
     init_pipeline(&pipeline);
 
@@ -371,9 +389,14 @@ int main(int argc, char* argv[]) {
         g_main_context_iteration(g_main_context_default(),FALSE);
     }
 
-    /* clean up */
+    /* clean up GStreamer */
     gst_element_set_state (pipeline.gst_pipeline, GST_STATE_NULL);
     gst_object_unref (GST_OBJECT (pipeline.gst_pipeline));
+
+    /* clean up v4l2 */
+    stop_capturing(fd);
+    uninit_device();
+    close_device(fd);
 
     return EXIT_SUCCESS;
 }
