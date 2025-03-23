@@ -252,7 +252,6 @@ v4l2-ctl -d /dev/v4l-subdev3 --list-ctrls-menu
 v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl gain_automatic=1
 v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl auto_exposure=0
 v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl exposure=4
-v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl analogue_gain=16
 v4l2-ctl -d /dev/v4l-subdev3 --set-ctrl white_balance_automatic=1
 ```
 
