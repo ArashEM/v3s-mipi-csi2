@@ -8,6 +8,7 @@ Here is some useful resources about `v4l2` and `v3s`
 - [Advanced Camera Support Allwinner SoCs mainline linux](https://bootlin.com/pub/conferences/2023/fosdem/kocialkowski-advanced-camera-support-allwinner-socs-mainline-linux/kocialkowski-advanced-camera-support-allwinner-socs-mainline-linux.pdf) by `Paul Kocialkowski`
 
 ## Websites 
+- [v4l2 C examples](https://github.com/kmdouglass/v4l2-examples)
 - [V4l2 and media controller](https://www.marcusfolkesson.se/blog/v4l2-and-media-controller/)
 - [STM32MP13 V4L2 camera overview](https://wiki.st.com/stm32mpu/wiki/STM32MP13_V4L2_camera_overview)
 - [Allwinner A31/A83T MIPI CSI-2 Support and A31 ISP Support](https://lore.kernel.org/linux-arm-kernel/YgaO8bfP4gKW8BM0@aptenodytes/T/)
