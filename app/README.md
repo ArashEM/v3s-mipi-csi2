@@ -20,7 +20,7 @@ Whatever I did, I couldn't make `v4l2src` to read data from `sun6i-isp-capture`.
 So,  
 What now?
 
-# appsrc 
+# gst-appsrc 
 As I described earlier, you can take frame(s) from `/dev/video2` via `v4l2-ctl`.  
 Which means `/dev/video2` is working!  
 Now I want to read data from it and stream it to my pipeline.  
@@ -40,7 +40,7 @@ In simply lets you read your raw data from wherever you want.
 Then push it into pipeline buffers. 
 This what I did in `main.c`
 
-# Compile
+## Compile
 Setup your environment (yocto base).  
 Compile with required library and headers of `gstreamer-app-1.0`.  
 ```
@@ -48,6 +48,19 @@ source source /opt/sdk/licheepi-zero/environment-setup-cortexa7t2hf-neon-poky-li
 $CC -Wall -Wextra $(pkg-config --libs --cflags gstreamer-app-1.0) main.c -o main
 ```
 
-# Resources
+## Resources
 1. [capture_raw_frames.c](https://gist.github.com/maxlapshin/1253534)
 2. [gst-appsrc.c](https://gist.github.com/floe/e35100f091315b86a5bf)
+
+# opencv
+You can also use `opencv` to capture frame and convert it to standard image format.
+
+## Compile
+```
+source source /opt/sdk/licheepi-zero/environment-setup-cortexa7t2hf-neon-poky-linux-gnueabi
+$CXX -Wall -Wextra $(pkg-config --libs --cflags opencv4) capture.c -o capture
+```
+
+## Resources
+- [Capture raw frame of webcam](https://github.com/opencv/opencv/issues/25681)
+
