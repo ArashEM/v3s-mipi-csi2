@@ -17,6 +17,7 @@ Here is some useful resources about `v4l2` and `v3s`
 - [Add MIPI D-PHY and MIPI CSI-2 interface nodes](https://patchwork.kernel.org/project/linux-media/patch/20201023174546.504028-11-paul.kocialkowski@bootlin.com/)
 - [RGB "Bayer" Color and MicroLenses](http://www.siliconimaging.com/RGB%20Bayer.htm)
 - [A tour of v4l2-ctl](https://trac.gateworks.com/wiki/linux/v4l2)
+- [v4l2 user api](https://www.kernel.org/doc/html/v4.9/media/uapi/v4l/user-func.html)
 
 # HW information
 Based on media topology you can list each `subdev` information via `v4l2-ctl` too.  
